@@ -1,0 +1,5 @@
+broker_address: "35.198.166.40"
+broker_port: 1883
+broker_keep_alive: 60
+broker_user: "dso_server"
+broker_pwd: "dso_password"

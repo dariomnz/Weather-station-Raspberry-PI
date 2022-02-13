@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DSO - Reto Final</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<meta charset="ISO-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" type="image/png" href="assets/DSO_logo.png" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- For the data tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/af-2.3.6/b-1.7.0/date-1.0.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rg-1.1.2/rr-1.2.7/sc-2.0.3/sb-1.0.1/sp-1.2.2/sl-1.3.3/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/af-2.3.6/b-1.7.0/date-1.0.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rg-1.1.2/rr-1.2.7/sc-2.0.3/sb-1.0.1/sp-1.2.2/sl-1.3.3/datatables.min.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.utm@1.0.0/L.LatLng.UTM.min.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+    <script type="text/javascript" src="plugins/am_map.js"></script>
+</head>
+<body>
+    <div class="device">
+        <h1>Mediciones de los sensores</h1>
+        <table id="device_table" class="display total_width">
+            <thead>
+                <tr>
+                    <th>Device ID</th>
+                    <th>Estado</th>
+                    <th>Latitud</th>
+                    <th>Longitud</th>
+                    <th>Fecha</th>
+                    <th>Boton</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="map_container"></div>
+    </div>
+    <div class="measures">
+        <div id="device_details" class="col2"></div>
+        <div class="filter_table_container col2">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Inicio:</td>
+                        <td><input type="datetime-local" id="min" name="min"></td>
+                        <td>Fin:</td>
+                        <td><input type="datetime-local" id="max" name="max"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <table id="measures_table" class="display total_width">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Temperatura</th>
+                    <th>Humedad</th>
+                    <th>Device</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="button_container">
+            <button id="volver">Volver</button>
+        </div>
+    </div>
+
+	<script type="text/javascript" src="js_lib.js"></script>
+</body>
+</html>

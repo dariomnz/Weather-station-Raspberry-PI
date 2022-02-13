@@ -1,0 +1,4 @@
+dbhost: "localhost"
+dbuser: "iot_user"
+dbpassword: "9R[-RP#64nY7*E*H"
+dbdatabase: "iot_data"

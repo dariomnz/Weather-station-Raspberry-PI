@@ -1,0 +1,80 @@
+body{
+    background-color: #ffe3b3;
+    font-size: larger;
+}
+
+.map_container{
+    border: 5px solid #4f828f;
+    border-radius: 5px;
+}
+
+thead{
+    background-color: #60a1b1 !important;
+}
+
+.odd{
+    background-color: #63caa7 !important;
+}
+.odd .sorting_1{
+    background-color: #5ec09f !important;
+}
+
+.even{
+    background-color: #b7c7c1 !important;
+}
+.even .sorting_1{
+    background-color: #adbbb5 !important;
+}
+
+.odd:hover{
+    background-color: #5ec09f !important;
+}
+
+.even:hover{
+    background-color: #adbbb5 !important;
+}
+
+table.dataTable thead .sorting_asc{
+    filter: brightness(1000%);
+}
+table.dataTable thead .sorting_desc{
+    filter: brightness(1000%);
+}
+
+.button_container{
+    text-align: center;
+    width: 100%;
+}
+
+.button_container button{
+    font-size: 1rem;
+}
+#device_details{
+        text-align: center;
+}
+h1{
+    text-align: center;
+}
+.filter_table_container{
+    text-align: center;
+    text-align: -webkit-center;
+    padding: 20px;
+}
+input{
+    font-size: 1rem;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+.dataTables_info{
+    display: none;
+}
+
+#volver{
+    
+    height: 40px;
+    width: 200px;
+    margin: 30px;
+}

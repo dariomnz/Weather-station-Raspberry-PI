@@ -1,0 +1,86 @@
+version: '3'
+
+services:
+  message_broker:
+    build: message_broker
+    ports:
+      - '1883:1883'
+    volumes:
+      - ./message_broker/app/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=mariaDBpassword
+      - MYSQL_DATABASE=iot_data
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
+    volumes:
+      - ./mariaDB:/docker-entrypoint-initdb.d
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  webapp_backend:
+    build: ./webapp_backend
+    ports:
+      - '5000:5000'
+    environment:
+      - MEASUREMENTS_MICROSERVICE_ADDRESS=35.198.162.23
+      - MEASUREMENTS_MICROSERVICE_PORT=5001
+      - DEVICES_MICROSERVICE_ADDRESS=35.198.162.23
+      - DEVICES_MICROSERVICE_PORT=5002
+      - HOST=0.0.0.0
+      - PORT=5000
+
+  message_router:
+    build: message_router
+    environment:
+      - BROKER_ADDRESS=35.198.162.23
+      - BROKER_PORT=1883
+      - BROKER_KEEP_ALIVE=60
+      - BROKER_USER=dso_server
+      - BROKER_PWD=dso_password
+      - MEASUREMENTS_MICROSERVICE_ADDRESS=35.198.162.23
+      - MEASUREMENTS_MICROSERVICE_PORT=5001
+      - DEVICES_MICROSERVICE_ADDRESS=35.198.162.23
+      - DEVICES_MICROSERVICE_PORT=5002
+
+  devices_microservice:
+    build: microservices/devices_microservice
+    ports:
+      - '5002:5002'
+    links:
+      - "mariadb:mariadb"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5002
+      - DBHOST=mariadb
+      - DBUSER=iot_user
+      - DBPASSWORD=9R[-RP#64nY7*E*H
+      - DBDATABASE=iot_data
+    depends_on:
+      - mariadb
+
+  measurements_microservice:
+    build: microservices/measurements_microservice
+    ports:
+      - '5001:5001'
+    links:
+      - "mariadb:mariadb"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5001
+      - DBHOST=mariadb
+      - DBUSER=iot_user
+      - DBPASSWORD=9R[-RP#64nY7*E*H
+      - DBDATABASE=iot_data
+    depends_on:
+      - mariadb
+
+  webapp_frontend:
+    build: ./webapp_frontend
+    ports:
+      - '80:80'
